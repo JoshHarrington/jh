@@ -3,7 +3,7 @@ var PAGE;
 (function ($) {
     "use strict";
     PAGE = (function () {
-        
+
         function initRemoveOverlayPlayVideo(){
 
             $('.videoContainer').each(function () {
@@ -37,44 +37,44 @@ var PAGE;
                 $('.demoOverlay').toggleClass('demoOverlay--close');
             });
         }
-        
+
         function inithambgrMenuBtn() {
             $('.hamburgerIcon').click(function(){
                 $('.hambgrMenu').toggleClass('hambgrMenu--closed');
             });
         }
-        
+
         function initSidebarDropdown() {
             $('.sidebar h3').click(function(){
                 $(this).parent().toggleClass('sidebar-li--open');
             });
         }
-        
+
         function initFixSidebar() {
-            
+
             var sidebar = $('.sidebar');
-            
+
             var contentBottom = 0;
             contentBottom = $('.contentPage-textBlock').offset().top + $('.contentPage-textBlock').outerHeight();
             $(window).resize(function() {
                 contentBottom = $('.contentPage-textBlock').offset().top + $('.contentPage-textBlock').outerHeight();
             });
-            
-                        
 
-            
+
+
+
             $(window).scroll(function() {
-                            
+
                 var windowBottom = $(window).scrollTop() + $(window).height();
-                
+
 
                 contentBottom = $('.contentPage-textBlock').offset().top + $('.contentPage-textBlock').outerHeight();
-                
+
                 var scroll = $(window).scrollTop() - $('.banner').height() - $('.bannerNav').height();
-                
-                
+
+
                 var scrollBottom = contentBottom - windowBottom;
-                
+
 
                 if (scroll >= 10) {
                     if(!$('.sidebar').hasClass('sidebar--fixed')){
@@ -90,15 +90,15 @@ var PAGE;
                 } else {
                     sidebar.removeClass('sidebar--fixed');
                 }
-                
-            });
-            
-        }
-        
-        
-        
 
-        
+            });
+
+        }
+
+
+
+
+
         return {
             // public members
             init: function() {
@@ -106,11 +106,13 @@ var PAGE;
                 initCloseDemoApply();
                 inithambgrMenuBtn();
                 initSidebarDropdown();
-                initFixSidebar();
+                if($('.sidebar').length){
+                  initFixSidebar();
+                }
             }
         };
     }());
-    
+
         $(function() {
         PAGE.init();
     });
